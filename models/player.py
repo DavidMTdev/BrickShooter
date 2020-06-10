@@ -30,8 +30,8 @@ class Player(Base):
         self.credit = credit
         self.password = password
 
-    def getPlayer(self, id):
+    def getPlayer(id):
         return session.query(Player).filter_by(id=id).first()
 
-    def getAllPlayer(self):
+    def getAllPlayer():
         return session.query(Player).all()
