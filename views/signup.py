@@ -14,8 +14,11 @@ class Signup:
                                      text="S'inscrire",
                                      manager=self.manager, object_id='#id2')
 
-        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(400, 20, 100, 50),
+        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(200, 100, 100, 50),
                                       manager=self.manager, object_id='#id1')
+
+        self.password = UITextEntryLine(relative_rect=pygame.Rect(200, 400, 100, 50),
+                                        manager=self.manager, object_id='#id1')
 
     def getManager(self):
         return self.manager
@@ -26,9 +29,12 @@ class Signup:
     def getPseudo(self):
         return self.pseudo
 
-    def getView(self, event, instance):
+    def getPassword(self):
+        return self.password
+
+    def getView(self, event):
         if event.type == pygame.USEREVENT:
             if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == self.getButton():
-                    return instance
+                    return 'home'
         return self
