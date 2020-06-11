@@ -2,7 +2,7 @@
 import pygame
 import pygame_gui
 from pygame_gui import UIManager
-from pygame_gui.elements import UIButton, UITextEntryLine
+from pygame_gui.elements import UIButton, UITextEntryLine, UILabel
 
 
 class Signup:
@@ -10,21 +10,36 @@ class Signup:
 
         self.manager = UIManager((800, 600), 'themes/signup.json')
 
-        self.hello_button = UIButton(relative_rect=pygame.Rect(30, 20, 100, 50),
+        self.labelPseudo = UILabel(relative_rect=pygame.Rect(255, 92, 100, 50),
+                                      text='Pseudo',
+                                      manager=self.manager)
+
+        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(330, 100, 150, 50),
+                                      manager=self.manager)
+
+        self.labelPassword = UILabel(relative_rect=pygame.Rect(230, 172, 100, 50),
+                                      text='Mot de passe',
+                                      manager=self.manager)
+
+        self.password = UITextEntryLine(relative_rect=pygame.Rect(330, 180, 150, 50),
+                                        manager=self.manager)
+
+        self.buttonSignup = UIButton(relative_rect=pygame.Rect(350, 300, 110, 50),
                                      text="S'inscrire",
-                                     manager=self.manager, object_id='#id2')
+                                     manager=self.manager)
 
-        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(200, 100, 100, 50),
-                                      manager=self.manager, object_id='#id1')
-
-        self.password = UITextEntryLine(relative_rect=pygame.Rect(200, 400, 100, 50),
-                                        manager=self.manager, object_id='#id1')
+        self.buttonLogin = UIButton(relative_rect=pygame.Rect(330, 400, 150, 50),
+                                     text="Déja un compte ?",
+                                     manager=self.manager)
 
     def getManager(self):
         return self.manager
 
-    def getButton(self):
-        return self.hello_button
+    def getButtonSignup(self):
+        return self.buttonSignup
+
+    def getButtonLogin(self):
+        return self.buttonLogin
 
     def getPseudo(self):
         return self.pseudo
@@ -35,6 +50,8 @@ class Signup:
     def getView(self, event):
         if event.type == pygame.USEREVENT:
             if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
-                if event.ui_element == self.getButton():
+                if event.ui_element == self.getButtonSignup():
                     return 'home'
+                if event.ui_element == self.getButtonLogin():
+                    return 'login'    
         return self

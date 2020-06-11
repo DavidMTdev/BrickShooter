@@ -1,14 +1,15 @@
 {
-	"#text": {
-		"colours": {
-			"dark_bg": "#000000"
-		}
-	},
-	"#id1": {
+	"label": {
 		"colours": {
 			"dark_bg": "#ffffff",
+			"normal_text": "#000000"
+		}
+	},
+	"text_entry_line": {
+		"colours": {
+			"dark_bg": "#ff0000",
 			"selected_bg": "#37FF33",
-			"normal_text": "#000000",
+			"normal_text": "#ffffff",
 			"selected_text": "#FFFFFF",
 			"normal_border": "#FFFFFF"
 		},
@@ -20,9 +21,9 @@
 			"padding": "6,4"
 		}
 	},
-	"#id2": {
+	"button": {
 		"colours": {
-			"normal_bg": "#37FF33"
+			"normal_bg": "#6F6F6F"
 		}
 	},
 	"defaults": {

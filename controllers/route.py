@@ -62,3 +62,7 @@ class Route():
                     Auth().register(pseudo, password)
 
                     self.setRoute('home')
+                
+                elif self.signup.getView(event) == 'login':
+                    self.uiManager = self.login.getManager()
+                    self.setRoute('login')
