@@ -30,6 +30,7 @@ class Route():
                     self.uiManager = self.login.getManager()
                     self.setRoute('login')
 
+
     def loginRoute(self, event):
         if self.getRoute() == 'login':
             if self.login.getView(event) != self.login:
@@ -43,6 +44,11 @@ class Route():
                     if success is True:
                         self.uiManager = self.home.getManager()
                         self.setRoute('home')
+                        
+                elif self.login.getView(event) == 'signup':
+                     self.uiManager = self.signup.getManager()
+                     self.setRoute('signup')
+
 
     def signupRoute(self, event):
         if self.getRoute() == 'signup':

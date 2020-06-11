@@ -1,10 +1,11 @@
 {
-	"#text": {
+	"label": {
 		"colours": {
-			"dark_bg": "#ffffff"
+			"dark_bg": "#ffffff",
+			"normal_text": "#000000"
 		}
 	},
-	"#id1": {
+	"text_entry_line": {
 		"colours": {
 			"dark_bg": "#ff0000",
 			"selected_bg": "#37FF33",
@@ -20,9 +21,9 @@
 			"padding": "6,4"
 		}
 	},
-	"#id2": {
+	"button": {
 		"colours": {
-			"normal_bg": "#37FF33"
+			"normal_bg": "#6F6F6F"
 		}
 	},
 	"defaults": {

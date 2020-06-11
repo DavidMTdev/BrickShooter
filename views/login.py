@@ -2,29 +2,44 @@
 import pygame
 import pygame_gui
 from pygame_gui import UIManager
-from pygame_gui.elements import UIButton, UITextEntryLine
+from pygame_gui.elements import UIButton, UITextEntryLine, UILabel
 
 
 class Login:
     def __init__(self):
 
-        self.manager = UIManager((800, 600), 'themes/theme.json')
+        self.manager = UIManager((800, 600), 'themes/theme.json')                            
 
-        self.hello_button = UIButton(relative_rect=pygame.Rect(30, 20, 100, 50),
-                                     text='Say Hello',
-                                     manager=self.manager, object_id='#id2')
+        self.labelPseudo = UILabel(relative_rect=pygame.Rect(255, 92, 100, 50),
+                                      text='Pseudo',
+                                      manager=self.manager)
 
-        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(200, 100, 100, 50),
-                                      manager=self.manager, object_id='#id1')
+        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(330, 100, 150, 50),
+                                      manager=self.manager)
 
-        self.password = UITextEntryLine(relative_rect=pygame.Rect(200, 400, 100, 50),
-                                        manager=self.manager, object_id='#id1')
+        self.labelPassword = UILabel(relative_rect=pygame.Rect(230, 172, 100, 50),
+                                      text='Mot de passe',
+                                      manager=self.manager)
+
+        self.password = UITextEntryLine(relative_rect=pygame.Rect(330, 180, 150, 50),
+                                        manager=self.manager)
+
+        self.buttonLogin = UIButton(relative_rect=pygame.Rect(350, 300, 110, 50),
+                                     text='Se connecter',
+                                     manager=self.manager)
+
+        self.buttonSignup = UIButton(relative_rect=pygame.Rect(330, 400, 150, 50),
+                                     text='Pas de compte ?',
+                                     manager=self.manager) 
 
     def getManager(self):
         return self.manager
 
-    def getButton(self):
-        return self.hello_button
+    def getButtonLogin(self):
+        return self.buttonLogin
+
+    def getButtonSignup(self):
+        return self.buttonSignup
 
     def getPseudo(self):
         return self.pseudo
@@ -38,7 +53,9 @@ class Login:
     def getView(self, event):
         if event.type == pygame.USEREVENT:
             if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
-                if event.ui_element == self.getButton():
+                if event.ui_element == self.getButtonLogin():
                     return 'home'
+                if event.ui_element == self.getButtonSignup():
+                    return 'signup'
 
         return self
