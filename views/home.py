@@ -11,6 +11,10 @@ class Home:
 
         self.manager = UIManager((800, 600), 'themes/home.json')
 
+        self.labelPseudo = UILabel(relative_rect=pygame.Rect(255, 92, 100, 50),
+                                   text='Pseudo',
+                                   manager=self.manager)
+
         self.button1 = UIButton(relative_rect=pygame.Rect(30, 20, 100, 50),
                                 text='inscription',
                                 manager=self.manager, object_id='#id2')

@@ -10,6 +10,8 @@ class Route():
         self.login = Login()
         self.home = Home()
 
+        self.session = None
+
         self.route = route
         self.uiManager = self.login.getManager()
 
@@ -30,7 +32,6 @@ class Route():
                     self.uiManager = self.login.getManager()
                     self.setRoute('login')
 
-
     def loginRoute(self, event):
         if self.getRoute() == 'login':
             if self.login.getView(event) != self.login:
@@ -39,30 +40,29 @@ class Route():
                     pseudo = self.login.getPseudo().get_text()
                     password = self.login.getPassword().get_text()
 
-                    success = Auth().login(pseudo, password)
+                    self.session = Auth().login(pseudo, password)
 
-                    if success is True:
+                    if self.session:
                         self.uiManager = self.home.getManager()
                         self.setRoute('home')
-                        
-                elif self.login.getView(event) == 'signup':
-                     self.uiManager = self.signup.getManager()
-                     self.setRoute('signup')
 
+                elif self.login.getView(event) == 'signup':
+                    self.uiManager = self.signup.getManager()
+                    self.setRoute('signup')
 
     def signupRoute(self, event):
         if self.getRoute() == 'signup':
             if self.signup.getView(event) != self.signup:
                 if self.signup.getView(event) == 'home':
-                    self.uiManager = self.home.getManager()
-
                     pseudo = self.signup.getPseudo().get_text()
                     password = self.signup.getPassword().get_text()
 
-                    Auth().register(pseudo, password)
+                    self.session = Auth().register(pseudo, password)
 
-                    self.setRoute('home')
-                
+                    if self.session:
+                        self.uiManager = self.home.getManager()
+                        self.setRoute('home')
+
                 elif self.signup.getView(event) == 'login':
                     self.uiManager = self.login.getManager()
                     self.setRoute('login')
