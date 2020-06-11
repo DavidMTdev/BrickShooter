@@ -11,7 +11,7 @@ class App:
 
         pygame.display.set_caption('Quick Start')
 
-        self.screen = pygame.display.set_mode((800, 600), RESIZABLE)
+        self.screen = pygame.display.set_mode((800, 600))
 
         self.background = pygame.Surface(self.screen.get_size())
         self.background.fill(pygame.Color('#ffffff'))
@@ -25,20 +25,31 @@ class App:
         while self.isRunning:
             timeDelta = self.clock.tick(60)/1000.0
 
-            for event in pygame.event.get():
+            if self.route.getRoute() == 'game':
+                self.route.pressed()
 
+            for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.isRunning = False
 
-                self.route.homeRoute(event)
-                self.route.loginRoute(event)
-                self.route.signupRoute(event)
+                if self.route.getRoute() == 'home':
+                    self.route.homeRoute(event)
+                if self.route.getRoute() == 'login':
+                    self.route.loginRoute(event)
+                if self.route.getRoute() == 'signup':
+                    self.route.signupRoute(event)
+                if self.route.getRoute() == 'creating':
+                    self.route.CreatePartyRoute(event)
+                if self.route.getRoute() == 'game':
+                    self.route.gameRoute(event)
+                    print(1)
 
                 self.route.uiManager.process_events(event)
 
             self.route.uiManager.update(timeDelta)
 
             self.screen.blit(self.background, (0, 0))
-            self.route.uiManager.draw_ui(self.screen)
 
+            self.route.uiManager.draw_ui(self.screen)
+            # pygame.display.flip()
             pygame.display.update()

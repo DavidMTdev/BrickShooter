@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 # create an engine
-Engine = create_engine('mysql+pymysql://root:@localhost/brickShooter', echo=True)
+Engine = create_engine('mysql+pymysql://root:@localhost/brickShooter', echo=False)
 
 # create a configured "Session" class
 Session = sessionmaker(bind=Engine)

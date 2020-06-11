@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, ForeignKey
 
-from config.base import Base
+from config.base import Base, session
 
 
 class Save(Base):
@@ -15,3 +15,6 @@ class Save(Base):
         self.player_id = player.id
         self.party_id = party.id
         self.score_id = score.id
+
+    def getAllSaveByplayerId(self, id):
+        return session.query(Save).filter_by(player_id=id).all()

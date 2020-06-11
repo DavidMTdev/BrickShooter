@@ -11,9 +11,9 @@ from models.equipment import Equipment
 Base.metadata.drop_all(Engine)
 Base.metadata.create_all(Engine)
 
-# session = Session()
+session = Session()
 
-# player = Player("david", 20000, "aerty")
+player = Player("david", 20000, "aerty")
 # player2 = Player("louis", 20000, "aerty")
 # equipment = Equipment("name", 2, 3, 'avantage', 4)
 # equipment2 = Equipment("name", 2, 3, 'avantage', 4)
@@ -22,7 +22,7 @@ Base.metadata.create_all(Engine)
 # save = Save(player, party, score)
 
 # session.add(party)
-# session.add(player)
+session.add(player)
 # session.add(player2)
 # session.add(equipment)
 # session.add(equipment2)
@@ -35,7 +35,7 @@ Base.metadata.create_all(Engine)
 
 # session.add(save)
 
-# session.commit()
+session.commit()
 
 # p = session.query(Party).first()
 # print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
@@ -62,4 +62,4 @@ Base.metadata.create_all(Engine)
 # print(player.getAllPlayer())
 
 
-# session.close()
+session.close()
