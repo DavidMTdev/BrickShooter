@@ -102,7 +102,6 @@ class Route():
 
     def pressed(self):
         if self.game.pressed.get(pygame.K_RIGHT):
-            print(self.game.pressed)
             self.game.player.move("right")
 
         elif self.game.pressed.get(pygame.K_LEFT):

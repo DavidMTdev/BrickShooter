@@ -9,11 +9,13 @@ class Missile(pygame.sprite.Sprite):
         self.velocity = 10
         self.player = player
         self.image = pygame.image.load('assets/missile.png')
+        self.image = pygame.transform.scale(self.image, (10, 50))
+        # self.rectImage = self.image.get_rect()
         self.missileImage = UIImage(relative_rect=pygame.Rect(
             (self.player.rect.x + 25 - 5, self.player.rect.y - 50),
             (10, 50)),
             manager=manager, image_surface=self.image)
-        self.rect = self.missileImage.get_relative_rect()
+        self.rect = self.image.get_rect()
 
         self.rect.x = player.rect.x + 25 - 5
         self.rect.y = player.rect.y - 50
@@ -25,6 +27,14 @@ class Missile(pygame.sprite.Sprite):
     def move(self):
         self.rect.y -= self.velocity
         self.missileImage.set_position((self.rect.x, self.rect.y))
+
+        if self.player.game.checkColision(self, self.player.game.allEnemy):
+            for enemy in self.player.game.checkColision(self, self.player.game.allEnemy):
+                enemy.remove()
+                enemy.ennemyImage.kill()
+                self.player.game.score += 100
+                self.player.game.setLabelScore()
+            self.remove()
 
         if self.rect.y < 0:
             self.remove()

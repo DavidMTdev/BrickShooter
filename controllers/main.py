@@ -14,26 +14,37 @@ class App:
         self.screen = pygame.display.set_mode((800, 600))
 
         self.background = pygame.Surface(self.screen.get_size())
-        self.background.fill(pygame.Color('#ffffff'))
+        self.background.fill(pygame.Color('#4D4D4D'))
 
         self.route = Route('login')
 
         self.clock = pygame.time.Clock()
         self.isRunning = True
+        self.reload = 0
 
     def run(self):
         while self.isRunning:
             timeDelta = self.clock.tick(60)/1000.0
 
             if self.route.getRoute() == 'game':
-                self.route.pressed()
+                if not self.route.game.player.isDead():
+                    self.route.pressed()
 
-                for missile in self.route.game.player.allMissile:
-                    missile.move()
+                    if self.reload:
+                        self.reload -= 1
+                    else:
+                        for i in range(0, 11):
+                            self.route.game.spawnEnemy(1, 75 * i)
+                        self.reload = 100
 
-                self.route.getAllEnemy().draw(self.screen)
-                for enemy in self.route.game.allEnemy:
-                    enemy.down()
+                    for missile in self.route.game.player.allMissile:
+                        missile.move()
+
+                    self.route.getAllEnemy().draw(self.screen)
+                    for enemy in self.route.game.allEnemy:
+                        enemy.down()
+                else:
+                    self.route.game.menuGameOver()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

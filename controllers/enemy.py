@@ -8,8 +8,9 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__()
         self.game = game
         self.health = health
-        self.velocity = 2
-        self.image = pygame.image.load('assets/player.png')
+        self.velocity = 1
+        self.image = pygame.image.load('assets/enemy.png')
+        self.image = pygame.transform.scale(self.image, (50, 50))
         self.ennemyImage = UIImage(relative_rect=pygame.Rect((0, 0), (50, 50)),
                                    manager=manager,  image_surface=self.image)
 
@@ -18,14 +19,18 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = -100
 
     def down(self):
-        # if not self.game.checkColision(self, self.game.allPlayers):
-        self.rect.y += self.velocity
-        self.ennemyImage.set_position((self.rect.x, self.rect.y))
+        if not self.game.checkColision(self, self.game.allPlayers):
+            self.rect.y += self.velocity
+            self.ennemyImage.set_position((self.rect.x, self.rect.y))
+        else:
+            if self.game.player.hit():
+                self.remove()
+
         if self.rect.y > 530:
+            self.game.score -= 50
+            self.game.setLabelScore()
             self.remove()
 
     def remove(self):
         self.ennemyImage.kill()
         self.game.allEnemy.remove(self)
-        self.game.player.health -= 1
-        print(self.game.player.health)

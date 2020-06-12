@@ -3,13 +3,15 @@ from controllers.missile import Missile
 
 
 class Perso(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, game):
         super().__init__()
         self.health = 3
+        self.game = game
         # self.attack = 1
         self.velocity = 10
         self.allMissile = pygame.sprite.Group()
         self.image = pygame.image.load('assets/player.png')
+        self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
         self.rect.x = 400 - 25
         self.rect.y = 600 - 70
@@ -23,5 +25,14 @@ class Perso(pygame.sprite.Sprite):
     def attack(self, manager):
         self.allMissile.add(Missile(self, manager))
 
+    def hit(self):
+        if self.health > 0:
+            self.health -= 1
+
+        return True
+
     def isDead(self):
-        pass
+        if self.health <= 0:
+            return True
+
+        return False
