@@ -98,8 +98,6 @@ class Route():
 
     def gameRoute(self, event):
         self.game.getEvent(event)
-        print(self.game.pressed)
-
         self.pressed()
 
     def pressed(self):
@@ -111,3 +109,6 @@ class Route():
             self.game.player.move("left")
 
         self.game.updatePosPlayer()
+
+    def getAllEnemy(self):
+        return self.game.allEnemy

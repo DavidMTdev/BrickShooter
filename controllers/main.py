@@ -28,6 +28,13 @@ class App:
             if self.route.getRoute() == 'game':
                 self.route.pressed()
 
+                for missile in self.route.game.player.allMissile:
+                    missile.move()
+
+                self.route.getAllEnemy().draw(self.screen)
+                for enemy in self.route.game.allEnemy:
+                    enemy.down()
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.isRunning = False
@@ -42,7 +49,6 @@ class App:
                     self.route.CreatePartyRoute(event)
                 if self.route.getRoute() == 'game':
                     self.route.gameRoute(event)
-                    print(1)
 
                 self.route.uiManager.process_events(event)
 
