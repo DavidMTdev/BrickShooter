@@ -24,16 +24,29 @@ class Missile(pygame.sprite.Sprite):
         self.player.allMissile.remove(self)
         self.missileImage.kill()
 
+    def hit(self, enemy):
+        if enemy.health > 0:
+            enemy.health -= 1
+            return True
+
+    def isDead(self, enemy):
+        if enemy.health <= 0:
+            return True
+
+        return False
+
     def move(self):
         self.rect.y -= self.velocity
         self.missileImage.set_position((self.rect.x, self.rect.y))
 
         if self.player.game.checkColision(self, self.player.game.allEnemy):
             for enemy in self.player.game.checkColision(self, self.player.game.allEnemy):
-                enemy.remove()
-                enemy.ennemyImage.kill()
-                self.player.game.score += 100
-                self.player.game.setLabelScore()
+                self.hit(enemy)
+                if self.isDead(enemy):
+                    enemy.remove()
+                    enemy.ennemyImage.kill()
+                    self.player.game.score += 100
+                    self.player.game.setLabelScore()
             self.remove()
 
         if self.rect.y < 0:

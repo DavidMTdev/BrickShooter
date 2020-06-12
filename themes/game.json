@@ -21,11 +21,12 @@
 			"normal_text": "#ffffff"
 		}
 	},
-	"button": {
+	"#panel-game-over.button": {
 		"colours": {
 			"normal_bg": "#34495e",
 			"normal_text": "#ffffff",
-			"normal_border": "#2c3e50"
+			"normal_border": "#2c3e50",
+			"hovered_bg": "#ff0000"
 		}
 	}
 }

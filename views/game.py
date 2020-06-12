@@ -6,6 +6,7 @@ from pygame_gui import UIManager
 from pygame_gui.elements import UILabel, UIImage, UIPanel, UIButton
 from controllers.perso import Perso
 from controllers.enemy import Enemy
+from controllers.niveau import Niveau
 
 
 class Game:
@@ -33,7 +34,7 @@ class Game:
 
     def menuGameOver(self):
 
-        self.panel = UIPanel(relative_rect=pygame.Rect(0, 0, 800, 600), starting_layer_height=1,
+        self.panel = UIPanel(relative_rect=pygame.Rect(0, 0, 800, 600), starting_layer_height=2,
                              manager=self.manager, object_id="#panel-game-over")
 
         self.labelGameOver = UILabel(relative_rect=pygame.Rect(400 - 100, 300 - 50, 200, 50),
@@ -48,6 +49,8 @@ class Game:
                                       (200, 50)),
             text='Recommencer', manager=self.manager, container=self.panel)
 
+        # self.background.kill()
+
     def setLabelScore(self):
         self.labelScore.set_text(str(self.score))
 
@@ -58,6 +61,7 @@ class Game:
         self.playerImage.set_relative_position((self.player.rect.x, self.player.rect.y))
 
     def getEvent(self, event):
+        print(event)
         if not self.player.isDead():
             if event.type == KEYDOWN:
                 if event.key == pygame.K_SPACE:
@@ -77,3 +81,6 @@ class Game:
 
     def checkColision(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
+
+    def getNiveau(self, level):
+        return Niveau(self, level)
