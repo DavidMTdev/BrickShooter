@@ -26,7 +26,7 @@ class Missile(pygame.sprite.Sprite):
 
     def hit(self, enemy):
         if enemy.health > 0:
-            enemy.health -= 1
+            enemy.health -= self.player.damage
             return True
 
     def isDead(self, enemy):

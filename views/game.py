@@ -24,6 +24,7 @@ class Game:
         self.pressed = {}
         self.allEnemy = pygame.sprite.Group()
         self.score = 0
+        self.level = Niveau(self, self.score)
 
         self.labelScore = UILabel(relative_rect=pygame.Rect(0, 600 - 50, 200, 50),
                                   text=str(self.score),
@@ -81,5 +82,9 @@ class Game:
     def checkColision(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
-    def getNiveau(self):
-        return Niveau(self, self.score)
+    # def getNiveau(self):
+    #     return Niveau(self, self.score)
+
+    def run(self):
+        self.level.generate()
+        self.level.setScore(self.score)

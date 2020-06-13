@@ -7,7 +7,7 @@ class Perso(pygame.sprite.Sprite):
         super().__init__()
         self.health = 3
         self.game = game
-        # self.attack = 1
+        self.damage = 1
         self.velocity = 10
         self.allMissile = pygame.sprite.Group()
         self.image = pygame.image.load('assets/player.png')
@@ -34,5 +34,4 @@ class Perso(pygame.sprite.Sprite):
     def isDead(self):
         if self.health <= 0:
             return True
-
         return False

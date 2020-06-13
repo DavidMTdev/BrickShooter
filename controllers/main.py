@@ -20,7 +20,7 @@ class App:
 
         self.clock = pygame.time.Clock()
         self.isRunning = True
-        self.reload = 0
+        # self.reload = 0
 
     def run(self):
         while self.isRunning:
@@ -33,8 +33,11 @@ class App:
                     # if self.reload:
                     #     self.reload -= 1
                     # else:
-                    self.route.game.getNiveau().generate(self.reload)
-                        # self.reload = 100
+                    # self.reload = self.route.game.getNiveau().generate(self.reload)
+                    self.route.game.run()
+                    # print(self.reload)
+
+                    # self.reload = 100
 
                     for missile in self.route.game.player.allMissile:
                         missile.move()
