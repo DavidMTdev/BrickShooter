@@ -30,13 +30,11 @@ class App:
                 if not self.route.game.player.isDead():
                     self.route.pressed()
 
-                    if self.reload:
-                        self.reload -= 1
-                    else:
-                        # for i in range(0, 11):
-                        #     self.route.game.spawnEnemy(1, 75 * i)
-                        self.route.game.getNiveau(1).generate()
-                        self.reload = 100
+                    # if self.reload:
+                    #     self.reload -= 1
+                    # else:
+                    self.route.game.getNiveau().generate(self.reload)
+                        # self.reload = 100
 
                     for missile in self.route.game.player.allMissile:
                         missile.move()

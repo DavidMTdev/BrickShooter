@@ -61,7 +61,6 @@ class Game:
         self.playerImage.set_relative_position((self.player.rect.x, self.player.rect.y))
 
     def getEvent(self, event):
-        print(event)
         if not self.player.isDead():
             if event.type == KEYDOWN:
                 if event.key == pygame.K_SPACE:
@@ -74,13 +73,13 @@ class Game:
     def updatePosEnemy(self, enemy, x, y):
         enemy.ennemyImage.set_relative_position((x, y))
 
-    def spawnEnemy(self, health, x):
-        enemy = Enemy(health, self.manager, x, self)
+    def spawnEnemy(self, health, x, asset):
+        enemy = Enemy(health, self.manager, x, self, asset)
         self.updatePosEnemy(enemy, enemy.rect.x, enemy.rect.y)
         self.allEnemy.add(enemy)
 
     def checkColision(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
-    def getNiveau(self, level):
-        return Niveau(self, level)
+    def getNiveau(self):
+        return Niveau(self, self.score)

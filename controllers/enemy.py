@@ -4,7 +4,7 @@ from pygame_gui.elements import UIImage
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, health, manager, x, game):
+    def __init__(self, health, manager, x, game, asset):
         super().__init__()
         self.game = game
         self.health = health
