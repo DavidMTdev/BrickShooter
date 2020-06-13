@@ -97,7 +97,10 @@ class Route():
                         self.setRoute('game')
 
     def gameRoute(self, event):
-        self.game.getEvent(event)
+        e = self.game.getEvent(event)
+        if e == 'restart':
+            self.game = Game()
+            self.uiManager = self.game.getManager()
         self.pressed()
 
     def pressed(self):

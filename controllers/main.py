@@ -20,33 +20,27 @@ class App:
 
         self.clock = pygame.time.Clock()
         self.isRunning = True
-        # self.reload = 0
 
     def run(self):
         while self.isRunning:
             timeDelta = self.clock.tick(60)/1000.0
 
             if self.route.getRoute() == 'game':
-                if not self.route.game.player.isDead():
-                    self.route.pressed()
 
-                    # if self.reload:
-                    #     self.reload -= 1
-                    # else:
-                    # self.reload = self.route.game.getNiveau().generate(self.reload)
-                    self.route.game.run()
-                    # print(self.reload)
+                if self.route.game.getPause():
+                    if not self.route.game.player.isDead():
+                        self.route.pressed()
 
-                    # self.reload = 100
+                        self.route.game.run()
 
-                    for missile in self.route.game.player.allMissile:
-                        missile.move()
+                        for missile in self.route.game.player.allMissile:
+                            missile.move()
 
-                    self.route.getAllEnemy().draw(self.screen)
-                    for enemy in self.route.game.allEnemy:
-                        enemy.down()
-                else:
-                    self.route.game.menuGameOver()
+                        self.route.getAllEnemy().draw(self.screen)
+                        for enemy in self.route.game.allEnemy:
+                            enemy.down()
+                    else:
+                        self.route.game.menuGameOver()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

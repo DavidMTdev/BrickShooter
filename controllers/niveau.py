@@ -12,27 +12,11 @@ class Niveau:
         self.reload = 0
         self.maxReload = 100
 
-        # pourcentage d'apparition du niveau de l'ennemy (total doit être égal à 100)
-        self.enemyLevel1 = 100
-        self.enemyLevel2 = 0
-        self.enemyLevel3 = 0
-
         # pourcentage d'apparition d'un enemy normal ou surprise
         self.enemy = 95
         self.enemySurprise = 5
         self.probaEnemy = []
         self.assets = []
-
-    # def generate(self, reload):
-    #     print(reload)
-    #     if reload:
-    #         reload -= 1
-    #         return reload
-    #     else:
-    #         for i in range(0, 11):
-    #             self.generateEnemy(i)
-    #         reload = self.reload
-    #         return reload
 
     def generate(self):
         # print(self.reload)
@@ -46,18 +30,50 @@ class Niveau:
 
     def generateEnemy(self, i):
         proba = 0
+        self.setProbaEnemy()
+        proba = random.randint(0, 99)
+
+        if self.probaEnemy[proba] == 'enemy':
+            self.game.spawnEnemy(self.levelEnemy(), 75 * i, False)
+            # print('enemy')
+
+        elif self.probaEnemy[proba] == 'enemySurprise':
+
+            self.game.spawnEnemy(1, 75 * i, 'enemySurprise')
+
+    def levelEnemy(self):
+        proba = random.randint(0, 100)
         if self.getLevel() == 1:
-            self.setProbaEnemy()
-            proba = random.randint(0, 99)
+            if proba <= 90:
+                enemy = 1
+            else:
+                enemy = 2
+        if self.getLevel() == 2:
+            if proba <= 70:
+                enemy = 1
+            elif proba > 70 and proba <= 90:
+                enemy = 2
+            else:
+                enemy = 3
+        if self.getLevel() == 3:
+            if proba <= 50:
+                enemy = 1
+            elif proba > 50 and proba <= 80:
+                enemy = 2
+            else:
+                enemy = 3
 
-            if self.probaEnemy[proba] == 'enemy':
-                self.game.spawnEnemy(1, 75 * i, False)
-                # print('enemy')
+        if self.getLevel() == 4:
+            if proba <= 30:
+                enemy = 1
+            elif proba > 30 and proba <= 60:
+                enemy = 2
+            else:
+                enemy = 3
 
-            elif self.probaEnemy[proba] == 'enemySurprise':
+        return enemy
 
-                self.game.spawnEnemy(1, 75 * i, 'enemySurprise')
-                # print('surprise')
+        # print('surprise')
 
     def setProbaEnemy(self):
         for enemyLevel1 in range(0, self.enemy):
@@ -72,4 +88,11 @@ class Niveau:
         self.level = level
 
     def getLevel(self):
+        if self.score > 15000:
+            self.setLevel(4)
+        elif self.score > 10000:
+            self.setLevel(3)
+        elif self.score > 5000:
+            self.setLevel(2)
+
         return self.level

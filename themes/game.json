@@ -15,18 +15,27 @@
 			"shadow_width": "0"
 		}
 	},
+	"#panel-top": {
+		"colours": {
+			"dark_bg": "#000000"
+		},
+		"misc": {
+			"shape": "rectangle",
+			"border_width": "0",
+			"shadow_width": "0"
+		}
+	},
 	"#label-game-over": {
 		"colours": {
 			"dark_bg": "#ffffff00",
 			"normal_text": "#ffffff"
 		}
 	},
-	"#panel-game-over.button": {
+	"button": {
 		"colours": {
 			"normal_bg": "#34495e",
 			"normal_text": "#ffffff",
-			"normal_border": "#2c3e50",
-			"hovered_bg": "#ff0000"
+			"normal_border": "#2c3e50"
 		}
 	}
 }
