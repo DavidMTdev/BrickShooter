@@ -8,6 +8,7 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__()
         self.game = game
         self.health = health
+        self.asset = asset
         self.velocity = 1
         self.image = pygame.image.load('assets/enemy.png')
         self.image = pygame.transform.scale(self.image, (50, 50))
@@ -34,3 +35,6 @@ class Enemy(pygame.sprite.Sprite):
     def remove(self):
         self.ennemyImage.kill()
         self.game.allEnemy.remove(self)
+
+
+    

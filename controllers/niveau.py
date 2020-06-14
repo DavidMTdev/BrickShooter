@@ -16,17 +16,21 @@ class Niveau:
         self.enemy = 95
         self.enemySurprise = 5
         self.probaEnemy = []
-        self.assets = []
+        self.assets = ["attack","reload"]
+
+        self.attack = [False,0]
 
     def generate(self):
         # print(self.reload)
         # print(self.score)
         if self.reload:
             self.reload -= 1
+            self.setSurprise()
         else:
             for i in range(0, 11):
                 self.generateEnemy(i)
             self.reload = self.maxReload
+            print(self.game.player.damage)
 
     def generateEnemy(self, i):
         proba = 0
@@ -35,11 +39,11 @@ class Niveau:
 
         if self.probaEnemy[proba] == 'enemy':
             self.game.spawnEnemy(self.levelEnemy(), 75 * i, False)
-            # print('enemy')
-
+        
         elif self.probaEnemy[proba] == 'enemySurprise':
+            probaAsset = random.randint(0, (len(self.assets) - 1))
+            self.game.spawnEnemy(1, 75 * i, self.assets[probaAsset])
 
-            self.game.spawnEnemy(1, 75 * i, 'enemySurprise')
 
     def levelEnemy(self):
         proba = random.randint(0, 100)
@@ -96,3 +100,10 @@ class Niveau:
             self.setLevel(2)
 
         return self.level
+
+    def setSurprise(self):
+        if(self.attack[1] > 0):
+            self.attack[1] -= 1
+        if self.attack[0] == True and self.attack[1] == 0:
+            self.game.player.damage -= 1
+            self.attack[0] = False

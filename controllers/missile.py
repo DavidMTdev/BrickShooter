@@ -44,10 +44,28 @@ class Missile(pygame.sprite.Sprite):
                 self.hit(enemy)
                 if self.isDead(enemy):
                     enemy.remove()
+                    self.getSurprise(enemy.asset)
                     enemy.ennemyImage.kill()
                     self.player.game.score += 100
                     self.player.game.setLabelScore()
+
             self.remove()
 
         if self.rect.y < 0:
             self.remove()
+
+
+    def getSurprise(self, asset):
+        if asset != False:
+            print(asset)
+            if asset == "attack":
+                if self.player.game.level.attack[0] != True:
+                    self.player.damage += 1
+                    self.player.game.level.attack[0] = True
+
+                self.player.game.level.attack[1] += 1000 # 1000 equivalent à 10 apparition de ligne ennemie
+                print(self.player.game.level.attack[1])
+
+            elif asset == "reload":
+                self.player.game.level.reload = 200
+                print(self.player.game.level.reload)
