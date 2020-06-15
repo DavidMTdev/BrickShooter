@@ -10,21 +10,25 @@ class Login:
 
         self.manager = UIManager((800, 600), 'themes/theme.json')                            
 
-        self.labelPseudo = UILabel(relative_rect=pygame.Rect(255, 92, 100, 50),
+        self.title = UILabel(relative_rect=pygame.Rect(350, 50, 100, 50),
+                                      text='Connexion',
+                                      manager=self.manager)
+
+        self.labelPseudo = UILabel(relative_rect=pygame.Rect(255, 142, 100, 50),
                                       text='Pseudo',
                                       manager=self.manager)
 
-        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(330, 100, 150, 50),
+        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(330, 150, 150, 50),
                                       manager=self.manager)
 
-        self.labelPassword = UILabel(relative_rect=pygame.Rect(230, 172, 100, 50),
+        self.labelPassword = UILabel(relative_rect=pygame.Rect(230, 222, 100, 50),
                                       text='Mot de passe',
                                       manager=self.manager)
 
-        self.password = UITextEntryLine(relative_rect=pygame.Rect(330, 180, 150, 50),
+        self.password = UITextEntryLine(relative_rect=pygame.Rect(330, 230, 150, 50),
                                         manager=self.manager)
 
-        self.buttonLogin = UIButton(relative_rect=pygame.Rect(350, 300, 110, 50),
+        self.buttonLogin = UIButton(relative_rect=pygame.Rect(350, 320, 110, 50),
                                      text='Se connecter',
                                      manager=self.manager)
 

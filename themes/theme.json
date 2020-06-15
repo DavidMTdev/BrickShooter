@@ -1,23 +1,17 @@
 {
 	"label": {
 		"colours": {
-			"dark_bg": "#ffffff",
-			"normal_text": "#000000"
-		},
-		"font": {
-			"name": "montserrat",
-			"size": "12",
-			"bold": "0",
-			"italic": "0"
+			"dark_bg": "#ffffff00",
+			"normal_text": "#ffffff"
 		}
 	},
 	"text_entry_line": {
 		"colours": {
-			"dark_bg": "#ff0000",
+			"dark_bg": "#ffffff",
 			"selected_bg": "#37FF33",
-			"normal_text": "#ffffff",
+			"normal_text": "#000000",
 			"selected_text": "#FFFFFF",
-			"normal_border": "#FFFFFF"
+			"normal_border": "#ffffff00"
 		},
 		"misc": {
 			"shape": "rounded_rectangle",
@@ -29,7 +23,9 @@
 	},
 	"button": {
 		"colours": {
-			"normal_bg": "#6F6F6F"
+			"normal_bg": "#34495e",
+			"normal_text": "#ffffff",
+			"normal_border": "#2c3e50"
 		}
 	},
 	"defaults": {
