@@ -33,9 +33,9 @@ class Route():
 
     def homeRoute(self, event):
         if self.home.getView(event) != self.home:
-            if self.home.getView(event) == 'signup':
-                self.uiManager = self.signup.getManager()
-                self.setRoute('signup')
+            if self.home.getView(event) == 'login':
+                self.uiManager = self.login.getManager()
+                self.setRoute('login')
             elif self.home.getView(event) == 'creating':
                 self.uiManager = self.createParty.getManager()
                 self.setRoute('creating')
@@ -90,16 +90,17 @@ class Route():
                     name = self.createParty.getParty().get_text()
 
                     self.party = Part().createParty(name)
+                    print(self.session)
 
                     if self.party:
-                        self.game = Game()
+                        self.game = Game(self.session)
                         self.uiManager = self.game.getManager()
                         self.setRoute('game')
 
     def gameRoute(self, event):
         e = self.game.getEvent(event)
         if e == 'restart':
-            self.game = Game()
+            self.game = Game(self.session)
             self.uiManager = self.game.getManager()
         self.pressed()
 

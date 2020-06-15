@@ -4,7 +4,7 @@ from pygame_gui.elements import UIImage
 
 
 class Missile(pygame.sprite.Sprite):
-    def __init__(self, player, manager):
+    def __init__(self, player, manager, x):
         super().__init__()
         self.velocity = 10
         self.player = player
@@ -17,7 +17,7 @@ class Missile(pygame.sprite.Sprite):
             manager=manager, image_surface=self.image)
         self.rect = self.image.get_rect()
 
-        self.rect.x = player.rect.x + 25 - 5
+        self.rect.x = player.rect.x + 25 - 5 + x
         self.rect.y = player.rect.y - 50
 
     def remove(self):
@@ -44,7 +44,7 @@ class Missile(pygame.sprite.Sprite):
                 self.hit(enemy)
                 if self.isDead(enemy):
                     enemy.remove()
-                    self.getSurprise(enemy.asset)
+                    self.player.getSurprise(enemy.asset)
                     enemy.ennemyImage.kill()
                     self.player.game.score += 100
                     self.player.game.setLabelScore()
@@ -53,19 +53,3 @@ class Missile(pygame.sprite.Sprite):
 
         if self.rect.y < 0:
             self.remove()
-
-
-    def getSurprise(self, asset):
-        if asset != False:
-            print(asset)
-            if asset == "attack":
-                if self.player.game.level.attack[0] != True:
-                    self.player.damage += 1
-                    self.player.game.level.attack[0] = True
-
-                self.player.game.level.attack[1] += 1000 # 1000 equivalent à 10 apparition de ligne ennemie
-                print(self.player.game.level.attack[1])
-
-            elif asset == "reload":
-                self.player.game.level.reload = 200
-                print(self.player.game.level.reload)

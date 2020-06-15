@@ -10,7 +10,7 @@ from controllers.niveau import Niveau
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, session):
         self.manager = UIManager((800, 600), 'themes/game.json')
 
         image = pygame.image.load('assets/background.png')
@@ -18,8 +18,9 @@ class Game:
         self.background = UIImage(relative_rect=pygame.Rect(0, 0, 800, 600),
                                   manager=self.manager,  image_surface=image)
 
+        self.session = session
         self.allPlayers = pygame.sprite.Group()
-        self.player = Perso(self)
+        self.player = Perso(self, self.session)
         self.allPlayers.add(self.player)
         self.pressed = {}
         self.allEnemy = pygame.sprite.Group()
@@ -36,6 +37,10 @@ class Game:
         self.labelHealth = UILabel(relative_rect=pygame.Rect(30, 0, 50, 20),
                                    text=str(self.player.health),
                                    manager=self.manager, object_id="#label-score", container=self.panelTop)
+
+        self.labelAsset = UILabel(relative_rect=pygame.Rect(800 - 100, 0, 50, 20),
+                                  text=str(self.level.assetIsActive[2]),
+                                  manager=self.manager, object_id="#label-score", container=self.panelTop)
 
         self.labelScore = UILabel(relative_rect=pygame.Rect(0, 600 - 50, 200, 50),
                                   text=str(self.score),
@@ -76,6 +81,32 @@ class Game:
                                       (200, 50)),
             text='Quitter', manager=self.manager, container=self.panelPause)
 
+        self.panelAsset = UIPanel(relative_rect=pygame.Rect((0, 0),
+                                                            (0, 0)), starting_layer_height=3,
+                                  manager=self.manager, object_id="#panel-game-over")
+
+        self.labelEquipment = UILabel(relative_rect=pygame.Rect(400 - 100, 50, 200, 50),
+                                      text="Pause",
+                                      manager=self.manager, object_id="#label-game-over", container=self.panelAsset)
+
+        self.button1 = UIButton(relative_rect=pygame.Rect(400 - 100, 50 + 50, 200, 50),
+                                text="Double l'attaque", manager=self.manager, container=self.panelAsset)
+
+        self.button2 = UIButton(
+            relative_rect=pygame.Rect((400 - 100, 120 + 50),
+                                      (200, 50)),
+            text='3 Missile', manager=self.manager, container=self.panelAsset)
+
+        self.button3 = UIButton(
+            relative_rect=pygame.Rect((400 - 100, 190 + 50),
+                                      (200, 50)),
+            text='Double Score', manager=self.manager, container=self.panelAsset)
+
+        self.button4 = UIButton(
+            relative_rect=pygame.Rect((400 - 100, 260 + 50),
+                                      (200, 50)),
+            text="Temps d'apparition", manager=self.manager, container=self.panelAsset)
+
         self.pause = True
 
     def menuGameOver(self):
@@ -86,6 +117,9 @@ class Game:
 
     def setLabelScore(self):
         self.labelScore.set_text(str(self.score))
+
+    def setLabelAsset(self):
+        self.labelAsset.set_text(str(self.level.assetIsActive[2]))
 
     def getManager(self):
         return self.manager
@@ -102,6 +136,27 @@ class Game:
                 if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == self.buttonQuit:
                         pygame.quit()
+                    elif event.ui_element == self.button1:
+
+                        self.player.getSurprise("damage")
+
+                        self.panelAsset.set_dimensions((0, 0))
+                        self.pause = True
+                    elif event.ui_element == self.button2:
+                        self.player.getSurprise("attack")
+
+                        self.panelAsset.set_dimensions((0, 0))
+                        self.pause = True
+                    elif event.ui_element == self.button3:
+                        self.player.getSurprise("score")
+
+                        self.panelAsset.set_dimensions((0, 0))
+                        self.pause = True
+                    elif event.ui_element == self.button4:
+                        self.player.getSurprise("reload")
+
+                        self.panelAsset.set_dimensions((0, 0))
+                        self.pause = True
 
             if event.type == KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -112,6 +167,18 @@ class Game:
 
                     else:
                         self.panelPause.set_dimensions((0, 0))
+                        self.pause = True
+
+                    return self.pause
+
+                if event.key == pygame.K_RETURN:
+
+                    if self.pause:
+                        self.panelAsset.set_dimensions((800, 600))
+                        self.pause = False
+
+                    else:
+                        self.panelAsset.set_dimensions((0, 0))
                         self.pause = True
 
                     return self.pause

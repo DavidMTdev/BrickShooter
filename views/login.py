@@ -8,33 +8,33 @@ from pygame_gui.elements import UIButton, UITextEntryLine, UILabel
 class Login:
     def __init__(self):
 
-        self.manager = UIManager((800, 600), 'themes/theme.json')                            
+        self.manager = UIManager((800, 600), 'themes/theme.json')
 
         self.title = UILabel(relative_rect=pygame.Rect(350, 50, 100, 50),
-                                      text='Connexion',
+                             text='Connexion',
+                             manager=self.manager)
+
+        self.labelPseudo = UILabel(relative_rect=pygame.Rect(400 - 210, 142, 100, 50),
+                                   text='Pseudo',
+                                   manager=self.manager)
+
+        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(400 - 100, 150, 200, 50),
                                       manager=self.manager)
 
-        self.labelPseudo = UILabel(relative_rect=pygame.Rect(255, 142, 100, 50),
-                                      text='Pseudo',
-                                      manager=self.manager)
-
-        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(330, 150, 150, 50),
-                                      manager=self.manager)
-
-        self.labelPassword = UILabel(relative_rect=pygame.Rect(230, 222, 100, 50),
-                                      text='Mot de passe',
-                                      manager=self.manager)
-
-        self.password = UITextEntryLine(relative_rect=pygame.Rect(330, 230, 150, 50),
-                                        manager=self.manager)
-
-        self.buttonLogin = UIButton(relative_rect=pygame.Rect(350, 320, 110, 50),
-                                     text='Se connecter',
+        self.labelPassword = UILabel(relative_rect=pygame.Rect(400 - 210, 222, 100, 50),
+                                     text='Mot de passe',
                                      manager=self.manager)
 
-        self.buttonSignup = UIButton(relative_rect=pygame.Rect(330, 400, 150, 50),
+        self.password = UITextEntryLine(relative_rect=pygame.Rect(400 - 100, 230, 200, 50),
+                                        manager=self.manager)
+
+        self.buttonLogin = UIButton(relative_rect=pygame.Rect(400 - 100, 320, 200, 50),
+                                    text='Se connecter',
+                                    manager=self.manager)
+
+        self.buttonSignup = UIButton(relative_rect=pygame.Rect(400 - 100, 400, 200, 50),
                                      text='Pas de compte ?',
-                                     manager=self.manager) 
+                                     manager=self.manager)
 
     def getManager(self):
         return self.manager

@@ -5,15 +5,16 @@ from models.player import Player, playerEquipment
 from models.save import Save
 from models.score import Score
 from models.equipment import Equipment
+from views.game import Game
 # from models.equipmentPlayer import EquipmentPlayer
 
 # 2 - generate database schema
 Base.metadata.drop_all(Engine)
 Base.metadata.create_all(Engine)
 
-session = Session()
+# session = Session()
 
-player = Player("david", 20000, "aerty")
+# player = Player("david", 20000, "aerty")
 # player2 = Player("louis", 20000, "aerty")
 # equipment = Equipment("name", 2, 3, 'avantage', 4)
 # equipment2 = Equipment("name", 2, 3, 'avantage', 4)
@@ -22,7 +23,7 @@ player = Player("david", 20000, "aerty")
 # save = Save(player, party, score)
 
 # session.add(party)
-session.add(player)
+# session.add(player)
 # session.add(player2)
 # session.add(equipment)
 # session.add(equipment2)
@@ -35,7 +36,7 @@ session.add(player)
 
 # session.add(save)
 
-session.commit()
+# session.commit()
 
 # p = session.query(Party).first()
 # print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
@@ -62,4 +63,4 @@ session.commit()
 # print(player.getAllPlayer())
 
 
-session.close()
+# session.close()

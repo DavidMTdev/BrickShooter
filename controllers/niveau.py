@@ -16,9 +16,9 @@ class Niveau:
         self.enemy = 95
         self.enemySurprise = 5
         self.probaEnemy = []
-        self.assets = ["attack","reload"]
+        self.assets = ["attack", "reload", "damage", "score"]
 
-        self.attack = [False,0]
+        self.assetIsActive = [False, 0, ""]
 
     def generate(self):
         # print(self.reload)
@@ -30,7 +30,6 @@ class Niveau:
             for i in range(0, 11):
                 self.generateEnemy(i)
             self.reload = self.maxReload
-            print(self.game.player.damage)
 
     def generateEnemy(self, i):
         proba = 0
@@ -39,11 +38,10 @@ class Niveau:
 
         if self.probaEnemy[proba] == 'enemy':
             self.game.spawnEnemy(self.levelEnemy(), 75 * i, False)
-        
+
         elif self.probaEnemy[proba] == 'enemySurprise':
             probaAsset = random.randint(0, (len(self.assets) - 1))
             self.game.spawnEnemy(1, 75 * i, self.assets[probaAsset])
-
 
     def levelEnemy(self):
         proba = random.randint(0, 100)
@@ -68,6 +66,8 @@ class Niveau:
                 enemy = 3
 
         if self.getLevel() == 4:
+            self.enemy = 90
+            self.enemySurprise = 10
             if proba <= 30:
                 enemy = 1
             elif proba > 30 and proba <= 60:
@@ -102,8 +102,17 @@ class Niveau:
         return self.level
 
     def setSurprise(self):
-        if(self.attack[1] > 0):
-            self.attack[1] -= 1
-        if self.attack[0] == True and self.attack[1] == 0:
-            self.game.player.damage -= 1
-            self.attack[0] = False
+        if(self.assetIsActive[1] > 0):
+            self.assetIsActive[1] -= 1
+        if self.assetIsActive[0] == True and self.assetIsActive[1] == 0:
+
+            if self.assetIsActive[2] == "attack":
+                self.game.player.attackIsActive = False
+
+            elif self.assetIsActive[2] == "damage":
+                self.game.player.damage -= 1
+
+            self.assetIsActive[0] = False
+            self.assetIsActive[2] = ""
+
+        self.game.setLabelAsset()

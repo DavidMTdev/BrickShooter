@@ -26,13 +26,13 @@ class Home:
                                           text='Instruction',
                                           manager=self.manager)
 
-        self.buttonShop = UIButton(relative_rect=pygame.Rect(400 - 100, 340, 200, 50),
-                                   text='Magasin',
-                                   manager=self.manager)
+        # self.buttonShop = UIButton(relative_rect=pygame.Rect(400 - 100, 340, 200, 50),
+        #                            text='Magasin',
+        #                            manager=self.manager)
 
-        self.buttonRanking = UIButton(relative_rect=pygame.Rect(400 - 100, 420, 200, 50),
-                                      text='Classement',
-                                      manager=self.manager)
+        # self.buttonRanking = UIButton(relative_rect=pygame.Rect(400 - 100, 420, 200, 50),
+        #                               text='Classement',
+        #                               manager=self.manager)
 
         self.buttonLogout = UIButton(relative_rect=pygame.Rect(800 - 220, 20, 200, 50),
                                      text='Déconnexion',
@@ -50,11 +50,11 @@ class Home:
                     return "loading"
                 elif event.ui_element == self.buttonInstruction:
                     return "instruction"
-                elif event.ui_element == self.buttonShop:
-                    return "shop"
-                elif event.ui_element == self.buttonRanking:
-                    return "ranking"
+                # elif event.ui_element == self.buttonShop:
+                #     return "shop"
+                # elif event.ui_element == self.buttonRanking:
+                #     return "ranking"
                 elif event.ui_element == self.buttonLogout:
-                    return "logout"
+                    return "login"
 
         return self

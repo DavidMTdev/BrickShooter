@@ -11,7 +11,7 @@ class Part:
 
         if name and not name.isspace():
 
-            party = Party([0, 0, 0, 0], name, [2, 'atout'])
+            party = Party(0)
 
             session.add(party)
             session.commit()
