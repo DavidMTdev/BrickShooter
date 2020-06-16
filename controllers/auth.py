@@ -1,6 +1,4 @@
-from models.player import Player, playerEquipment
-from models.equipment import Equipment
-from models.save import Save
+from models.player import Player
 from config.base import session
 
 
@@ -13,7 +11,7 @@ class Auth:
 
     def register(self, pseudo, password):
         if ((pseudo and not pseudo.isspace()) and (password and not password.isspace())):
-            player = Player(pseudo, 0, password)
+            player = Player(pseudo, 0, password, 0)
 
             session.add(player)
             session.commit()

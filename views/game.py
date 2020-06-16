@@ -90,22 +90,26 @@ class Game:
                                       manager=self.manager, object_id="#label-game-over", container=self.panelAsset)
 
         self.button1 = UIButton(relative_rect=pygame.Rect(400 - 100, 50 + 50, 200, 50),
-                                text="Double l'attaque", manager=self.manager, container=self.panelAsset)
+                                text="Double l'attaque 10C", manager=self.manager, container=self.panelAsset)
 
         self.button2 = UIButton(
             relative_rect=pygame.Rect((400 - 100, 120 + 50),
                                       (200, 50)),
-            text='3 Missile', manager=self.manager, container=self.panelAsset)
+            text='3 Missile 100C', manager=self.manager, container=self.panelAsset)
 
         self.button3 = UIButton(
             relative_rect=pygame.Rect((400 - 100, 190 + 50),
                                       (200, 50)),
-            text='Double Score', manager=self.manager, container=self.panelAsset)
+            text='Double Score 20C', manager=self.manager, container=self.panelAsset)
 
         self.button4 = UIButton(
             relative_rect=pygame.Rect((400 - 100, 260 + 50),
                                       (200, 50)),
-            text="Temps d'apparition", manager=self.manager, container=self.panelAsset)
+            text="Temps d'apparition 50C", manager=self.manager, container=self.panelAsset)
+
+        self.labelCredit = UILabel(relative_rect=pygame.Rect(400 - 100, 330 + 50, 200, 50),
+                                   text=str(self.player.credit),
+                                   manager=self.manager, object_id="#label-game-over", container=self.panelAsset)
 
         self.pause = True
 
@@ -120,6 +124,10 @@ class Game:
 
     def setLabelAsset(self):
         self.labelAsset.set_text(str(self.level.assetIsActive[2]))
+
+    def setLabelCredit(self):
+        self.player.credit += 1
+        self.labelCredit.set_text(str(self.player.credit))
 
     def getManager(self):
         return self.manager
@@ -136,27 +144,40 @@ class Game:
                 if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == self.buttonQuit:
                         pygame.quit()
+                    elif event.ui_element == self.buttonSave:
+                        self.session.setCredit(self.player.credit)
+                        self.session.setScore(self.score)
+                        pygame.quit()
+
                     elif event.ui_element == self.button1:
+                        if self.player.credit >= 10 and self.level.assetIsActive[0] == False:
+                            self.player.credit -= 10
+                            self.player.getSurprise("damage")
 
-                        self.player.getSurprise("damage")
+                            self.panelAsset.set_dimensions((0, 0))
 
-                        self.panelAsset.set_dimensions((0, 0))
-                        self.pause = True
+                            self.pause = True
                     elif event.ui_element == self.button2:
-                        self.player.getSurprise("attack")
+                        if self.player.credit >= 100 and self.level.assetIsActive[0] == False:
+                            self.player.credit -= 100
+                            self.player.getSurprise("attack")
 
-                        self.panelAsset.set_dimensions((0, 0))
-                        self.pause = True
+                            self.panelAsset.set_dimensions((0, 0))
+                            self.pause = True
                     elif event.ui_element == self.button3:
-                        self.player.getSurprise("score")
+                        if self.player.credit >= 20 and self.level.assetIsActive[0] == False:
+                            self.player.credit -= 20
+                            self.player.getSurprise("score")
 
-                        self.panelAsset.set_dimensions((0, 0))
-                        self.pause = True
+                            self.panelAsset.set_dimensions((0, 0))
+                            self.pause = True
                     elif event.ui_element == self.button4:
-                        self.player.getSurprise("reload")
+                        if self.player.credit >= 50 and self.level.assetIsActive[0] == False:
+                            self.player.credit -= 50
+                            self.player.getSurprise("reload")
 
-                        self.panelAsset.set_dimensions((0, 0))
-                        self.pause = True
+                            self.panelAsset.set_dimensions((0, 0))
+                            self.pause = True
 
             if event.type == KEYDOWN:
                 if event.key == pygame.K_ESCAPE:

@@ -37,8 +37,19 @@ class Route():
                 self.uiManager = self.login.getManager()
                 self.setRoute('login')
             elif self.home.getView(event) == 'creating':
-                self.uiManager = self.createParty.getManager()
-                self.setRoute('creating')
+                # self.uiManager = self.createParty.getManager()
+                # self.setRoute('creating')
+                self.game = Game(self.session)
+                self.uiManager = self.game.getManager()
+                self.setRoute('game')
+            elif self.home.getView(event) == 'loading':
+                # self.uiManager = self.createParty.getManager()
+                # self.setRoute('creating')
+                self.game = Game(self.session)
+                self.game.score = self.session.score
+                self.game.setLabelScore()
+                self.uiManager = self.game.getManager()
+                self.setRoute('game')
 
     def loginRoute(self, event):
         # if self.getRoute() == 'login':
@@ -83,19 +94,19 @@ class Route():
     #             self.uiManager = self.createParty.getManager()
     #             self.setRoute('creating')
 
-    def CreatePartyRoute(self, event):
-        if self.getRoute() == 'creating':
-            if self.createParty.getView(event) != self.createParty:
-                if self.createParty.getView(event) == 'game':
-                    name = self.createParty.getParty().get_text()
+    # def CreatePartyRoute(self, event):
+    #     if self.getRoute() == 'creating':
+    #         if self.createParty.getView(event) != self.createParty:
+    #             if self.createParty.getView(event) == 'game':
+    #                 name = self.createParty.getParty().get_text()
 
-                    self.party = Part().createParty(name)
-                    print(self.session)
+    #                 self.party = Part().createParty(name)
+    #                 print(self.session)
 
-                    if self.party:
-                        self.game = Game(self.session)
-                        self.uiManager = self.game.getManager()
-                        self.setRoute('game')
+    #                 if self.party:
+    #                     self.game = Game(self.session)
+    #                     self.uiManager = self.game.getManager()
+    #                     self.setRoute('game')
 
     def gameRoute(self, event):
         e = self.game.getEvent(event)

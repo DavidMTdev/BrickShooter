@@ -4,11 +4,11 @@ from sqlalchemy.orm import relationship
 from config.base import Base, Session
 
 
-playerEquipment = Table(
-    'player_equipment', Base.metadata,
-    Column('player_id', Integer, ForeignKey('player.id')),
-    Column('equipment_id', Integer, ForeignKey('equipment.id'))
-)
+# playerEquipment = Table(
+#     'player_equipment', Base.metadata,
+#     Column('player_id', Integer, ForeignKey('player.id')),
+#     Column('equipment_id', Integer, ForeignKey('equipment.id'))
+# )
 
 session = Session()
 
@@ -20,18 +20,37 @@ class Player(Base):
     pseudo = Column(String(50), nullable=True)
     credit = Column(Integer, nullable=True)
     password = Column(String(50), nullable=True)
+    score = Column(Integer, nullable=True)
 
-    equipments = relationship("Equipment", secondary=playerEquipment, backref="players")
+    # equipments = relationship("Equipment", secondary=playerEquipment, backref="players")
 
-    saves = relationship('Save', backref='player')
+    # saves = relationship('Save', backref='player')
 
-    def __init__(self, pseudo, credit, password):
+    def __init__(self, pseudo, credit, password, score):
         self.pseudo = pseudo
         self.credit = credit
         self.password = password
+        self.score = score
 
     def getPlayer(id):
         return session.query(Player).filter_by(id=id).first()
 
     def getAllPlayer():
         return session.query(Player).all()
+
+    def getCredit(self):
+        return self.credit
+
+    def setCredit(self, credit):
+        self.credit = credit
+
+        session.add(self)
+        session.commit()
+        session.close()
+
+    def setScore(self, score):
+        self.score = score
+
+        session.add(self)
+        session.commit()
+        session.close()

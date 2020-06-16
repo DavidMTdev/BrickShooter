@@ -1,11 +1,11 @@
 from config.base import Engine, Base, Session
 
-from models.party import Party
-from models.player import Player, playerEquipment
-from models.save import Save
-from models.score import Score
-from models.equipment import Equipment
-from views.game import Game
+# from models.party import Party
+from models.player import Player
+# from models.save import Save
+# from models.score import Score
+# from models.equipment import Equipment
+# from views.game import Game
 # from models.equipmentPlayer import EquipmentPlayer
 
 # 2 - generate database schema

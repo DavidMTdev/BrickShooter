@@ -48,6 +48,7 @@ class Missile(pygame.sprite.Sprite):
                     enemy.ennemyImage.kill()
                     self.player.game.score += 100
                     self.player.game.setLabelScore()
+                    self.player.game.setLabelCredit()
 
             self.remove()
 

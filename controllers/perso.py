@@ -1,5 +1,6 @@
 import pygame
 from controllers.missile import Missile
+from models.player import Player
 # from models.player import Player
 
 
@@ -17,6 +18,7 @@ class Perso(pygame.sprite.Sprite):
         self.rect.x = 400 - 25
         self.rect.y = 600 - 70
         self.attackIsActive = False
+        self.session = session
         self.credit = session.credit
         print(self.credit)
 
@@ -42,6 +44,8 @@ class Perso(pygame.sprite.Sprite):
 
     def isDead(self):
         if self.health <= 0:
+            self.session.setCredit(self.credit)
+            self.session.setScore(0)
             return True
         return False
 
