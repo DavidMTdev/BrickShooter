@@ -16,8 +16,8 @@ class Auth:
             session.add(player)
             session.commit()
             # session.close()
-
-            return player
+            p = Player.getPlayer(player.pseudo)
+            return p
 
     def login(self, pseudo, password):
         players = Player.getAllPlayer()

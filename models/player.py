@@ -32,8 +32,8 @@ class Player(Base):
         self.password = password
         self.score = score
 
-    def getPlayer(id):
-        return session.query(Player).filter_by(id=id).first()
+    def getPlayer(pseudo):
+        return session.query(Player).filter_by(pseudo=pseudo).first()
 
     def getAllPlayer():
         return session.query(Player).all()
