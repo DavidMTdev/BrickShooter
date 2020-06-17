@@ -111,6 +111,9 @@ class Niveau:
 
             elif self.assetIsActive[2] == "damage":
                 self.game.player.damage -= 1
+            
+            elif self.assetIsActive[2] == "score":
+                self.game.addScore -= 200
 
             self.assetIsActive[0] = False
             self.assetIsActive[2] = ""

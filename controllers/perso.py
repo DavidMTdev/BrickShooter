@@ -68,7 +68,7 @@ class Perso(pygame.sprite.Sprite):
                 self.game.level.assetIsActive[2] = "attack"
 
             elif asset == "score":
-                self.game.score += 200
+                self.game.addScore += 200
                 self.game.level.assetIsActive[0] = True
                 self.game.level.assetIsActive[1] += 500
                 self.game.level.assetIsActive[2] = "score"

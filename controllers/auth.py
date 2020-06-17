@@ -15,7 +15,7 @@ class Auth:
 
             session.add(player)
             session.commit()
-            session.close()
+            # session.close()
 
             return player
 

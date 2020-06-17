@@ -10,6 +10,7 @@ import pygame
 from pygame.locals import *
 
 
+
 class Route():
     def __init__(self, route):
         self.signup = Signup()
@@ -60,6 +61,7 @@ class Route():
                 self.session = Auth().login(pseudo, password)
 
                 if self.session:
+                    print(self.session.credit)
                     self.uiManager = self.home.getManager()
                     self.setRoute('home')
 
@@ -74,7 +76,7 @@ class Route():
                 pseudo = self.signup.getPseudo().get_text()
                 password = self.signup.getPassword().get_text()
                 self.session = Auth().register(pseudo, password)
-
+                # print(self.session.credit)
                 if self.session:
                     self.uiManager = self.home.getManager()
                     self.setRoute('home')
@@ -111,6 +113,7 @@ class Route():
     def gameRoute(self, event):
         e = self.game.getEvent(event)
         if e == 'restart':
+            print(self.session.credit)
             self.game = Game(self.session)
             self.uiManager = self.game.getManager()
         self.pressed()

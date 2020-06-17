@@ -12,7 +12,7 @@ from controllers.niveau import Niveau
 class Game:
     def __init__(self, session):
         self.manager = UIManager((800, 600), 'themes/game.json')
-
+        print(session.credit)
         image = pygame.image.load('assets/background.png')
 
         self.background = UIImage(relative_rect=pygame.Rect(0, 0, 800, 600),
@@ -24,6 +24,7 @@ class Game:
         self.allPlayers.add(self.player)
         self.pressed = {}
         self.allEnemy = pygame.sprite.Group()
+        self.addScore = 100
         self.score = 0
         self.level = Niveau(self, self.score)
 
