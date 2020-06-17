@@ -46,11 +46,11 @@ class Player(Base):
 
         session.add(self)
         session.commit()
-        session.close()
+        # session.close()
 
     def setScore(self, score):
         self.score = score
 
         session.add(self)
         session.commit()
-        session.close()
+        # session.close()
