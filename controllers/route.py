@@ -3,6 +3,7 @@ from views.signup import Signup
 from views.home import Home
 from views.loading import Loading
 from views.game import Game
+from views.instruction import Instruction
 from views.createParty import CreateParty
 from controllers.auth import Auth
 from controllers.part import Part
@@ -10,12 +11,12 @@ import pygame
 from pygame.locals import *
 
 
-
 class Route():
     def __init__(self, route):
         self.signup = Signup()
         self.login = Login()
         self.home = Home()
+        self.instruction = Instruction()
         # self.loading = Loading()
 
         self.createParty = CreateParty()
@@ -43,6 +44,11 @@ class Route():
                 self.game = Game(self.session)
                 self.uiManager = self.game.getManager()
                 self.setRoute('game')
+
+            elif self.home.getView(event) == 'instruction':
+                self.uiManager = self.instruction.getManager()
+                self.setRoute('instruction')
+
             elif self.home.getView(event) == 'loading':
                 # self.uiManager = self.createParty.getManager()
                 # self.setRoute('creating')
@@ -61,7 +67,6 @@ class Route():
                 self.session = Auth().login(pseudo, password)
 
                 if self.session:
-                    print(self.session.credit)
                     self.uiManager = self.home.getManager()
                     self.setRoute('home')
 
@@ -117,6 +122,16 @@ class Route():
             self.game = Game(self.session)
             self.uiManager = self.game.getManager()
         self.pressed()
+
+    def instructionRoute(self, event):
+        if self.instruction.getView(event) != self.instruction:
+            if self.instruction.getView(event) == 'login':
+                self.uiManager = self.login.getManager()
+                self.setRoute('login')
+
+            elif self.instruction.getView(event) == 'menu':
+                self.uiManager = self.home.getManager()
+                self.setRoute('home')
 
     def pressed(self):
         if self.game.pressed.get(pygame.K_RIGHT):

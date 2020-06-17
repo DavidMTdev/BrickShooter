@@ -12,7 +12,6 @@ from controllers.niveau import Niveau
 class Game:
     def __init__(self, session):
         self.manager = UIManager((800, 600), 'themes/game.json')
-        print(session.credit)
         image = pygame.image.load('assets/background.png')
 
         self.background = UIImage(relative_rect=pygame.Rect(0, 0, 800, 600),
@@ -96,7 +95,7 @@ class Game:
         self.button2 = UIButton(
             relative_rect=pygame.Rect((400 - 100, 120 + 50),
                                       (200, 50)),
-            text='3 Missile 100C', manager=self.manager, container=self.panelAsset)
+            text='3 Missiles 100C', manager=self.manager, container=self.panelAsset)
 
         self.button3 = UIButton(
             relative_rect=pygame.Rect((400 - 100, 190 + 50),

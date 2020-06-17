@@ -20,7 +20,6 @@ class Perso(pygame.sprite.Sprite):
         self.attackIsActive = False
         self.session = session
         self.credit = session.credit
-        print(self.credit)
 
     def move(self, direction):
         if direction == 'right' and self.rect.x < 750:
@@ -68,7 +67,7 @@ class Perso(pygame.sprite.Sprite):
                 self.game.level.assetIsActive[2] = "attack"
 
             elif asset == "score":
-                self.game.addScore += 200
+                self.game.addScore += 100
                 self.game.level.assetIsActive[0] = True
                 self.game.level.assetIsActive[1] += 500
                 self.game.level.assetIsActive[2] = "score"

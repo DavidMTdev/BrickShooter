@@ -56,6 +56,8 @@ class App:
                     self.route.CreatePartyRoute(event)
                 if self.route.getRoute() == 'game':
                     self.route.gameRoute(event)
+                if self.route.getRoute() == 'instruction':
+                    self.route.instructionRoute(event)
 
                 self.route.uiManager.process_events(event)
 
