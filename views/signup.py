@@ -10,31 +10,31 @@ class Signup:
 
         self.manager = UIManager((800, 600), 'themes/signup.json')
 
-        self.title = UILabel(relative_rect=pygame.Rect(350, 50, 100, 50),
-                                      text='Inscription',
+        self.title = UILabel(relative_rect=pygame.Rect(400 - 100, 50, 200, 50),
+                             text='Inscription',
+                             manager=self.manager)
+
+        self.labelPseudo = UILabel(relative_rect=pygame.Rect(400 - 210, 142, 100, 50),
+                                   text='Pseudo',
+                                   manager=self.manager)
+
+        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(400 - 100, 150, 200, 50),
                                       manager=self.manager)
 
-        self.labelPseudo = UILabel(relative_rect=pygame.Rect(255, 142, 100, 50),
-                                      text='Pseudo',
-                                      manager=self.manager)
+        self.labelPassword = UILabel(relative_rect=pygame.Rect(400 - 210, 222, 100, 50),
+                                     text='Mot de passe',
+                                     manager=self.manager)
 
-        self.pseudo = UITextEntryLine(relative_rect=pygame.Rect(330, 150, 150, 50),
-                                      manager=self.manager)
-
-        self.labelPassword = UILabel(relative_rect=pygame.Rect(230, 222, 100, 50),
-                                      text='Mot de passe',
-                                      manager=self.manager)
-
-        self.password = UITextEntryLine(relative_rect=pygame.Rect(330, 230, 150, 50),
+        self.password = UITextEntryLine(relative_rect=pygame.Rect(400 - 100, 230, 200, 50),
                                         manager=self.manager)
 
-        self.buttonSignup = UIButton(relative_rect=pygame.Rect(350, 320, 110, 50),
+        self.buttonSignup = UIButton(relative_rect=pygame.Rect(400 - 100, 320, 200, 50),
                                      text="S'inscrire",
                                      manager=self.manager)
 
-        self.buttonLogin = UIButton(relative_rect=pygame.Rect(330, 400, 150, 50),
-                                     text="Déja un compte ?",
-                                     manager=self.manager)
+        self.buttonLogin = UIButton(relative_rect=pygame.Rect(400 - 100, 400, 200, 50),
+                                    text="Déja un compte ?",
+                                    manager=self.manager)
 
     def getManager(self):
         return self.manager
@@ -57,5 +57,5 @@ class Signup:
                 if event.ui_element == self.getButtonSignup():
                     return 'home'
                 if event.ui_element == self.getButtonLogin():
-                    return 'login'    
+                    return 'login'
         return self
