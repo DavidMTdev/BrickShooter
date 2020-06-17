@@ -129,7 +129,7 @@ class Route():
                 self.uiManager = self.login.getManager()
                 self.setRoute('login')
 
-            elif self.instruction.getView(event) == 'menu':
+            elif self.instruction.getView(event) == 'home':
                 self.uiManager = self.home.getManager()
                 self.setRoute('home')
 
